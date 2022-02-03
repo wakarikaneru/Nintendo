@@ -91,10 +91,24 @@ bool CGamecubeController::read(void)
     // Additional information: If you press X + Y + Start on the controller for 3 seconds
     // It will turn off unless you release the buttons. The recalibration is all done
     // on the Gamecube side. If the controller resets origin will have different values for sure.
-    if (!gc_read(pin, &report, status.rumble))
-    {
-        reset();
-        return false;
+
+    switch (status.device) {
+      case NINTENDO_DEVICE_GC_WIRED:
+        if (!gc_read(pin, &report, status.rumble))
+        {
+            reset();
+            return false;
+        }
+        break;
+      case NINTENDO_DEVICE_GC_WHEEL:
+        if (!gc_read2(pin, &report, status.force))
+        {
+            reset();
+            return false;
+        }
+        break;
+      default:
+        break;
     }
 
     // Check if controller reported that we read the origin values (check if it disconnected).
@@ -123,6 +137,22 @@ bool CGamecubeController::setRumble(bool rumble)
     bool oldRumble = getRumble();
     status.rumble = rumble;
     return oldRumble;
+}
+
+
+bool CGamecubeController::getForce(void)
+{
+    // Read controller (force) state
+    return status.force;
+}
+
+
+bool CGamecubeController::setForce(uint8_t force)
+{
+    // Read controller (force) state and set new state
+    bool oldForce = getForce();
+    status.force = force;
+    return oldForce;
 }
 
 

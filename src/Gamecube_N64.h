@@ -62,6 +62,9 @@ typedef union{
                 uint8_t rumble : 1;
                 uint8_t status1 : 4;
             };
+            struct{
+                uint8_t force;
+            };
         };
     };
 } Gamecube_N64_Status_t;

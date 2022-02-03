@@ -47,6 +47,8 @@ public:
     inline bool read(void);
     inline bool getRumble(void);
     inline bool setRumble(bool rumble);
+    inline bool getForce(void);
+    inline bool setForce(uint8_t force);
     inline bool end(void);
     inline Gamecube_Status_t getStatus(void);
     inline Gamecube_Origin_t getOrigin(void);
