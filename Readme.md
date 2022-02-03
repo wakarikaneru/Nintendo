@@ -61,3 +61,8 @@ Contact
 Contact information can be found here:
 
 www.nicohood.de
+
+MEMO
+====
+
+Speed Force対応
